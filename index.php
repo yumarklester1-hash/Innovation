@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Group 5</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+        }
+
+        .form-group {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .form-group label {
+            width: 80px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            flex: 1;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            padding: 7px 15px;
+            margin-left: 80px;
+        }
+
+        .output {
+            max-width: 400px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .box {
+            width: 100%;
+            box-sizing: border-box;
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Innovative Task</h2>
+
+<?php
+// Initialize variables to keep input after submit
+$name = $age = $num1 = $num2 = "";
+?>
+
+<form method="post">
+    <div class="form-group">
+        <label>Name:</label>
+        <input type="text" name="name" 
+        value="<?php echo htmlspecialchars($name); ?>" required>
+    </div>
+    <div class="form-group">
+        <label>Age:</label>
+        <input type="number" name="age" 
+        value="<?php echo htmlspecialchars($age); ?>" required>
+    </div>
+    <div class="form-group">
+        <label>Num1:</label>
+        <input type="number" name="num1" step="any"
+        value="<?php echo htmlspecialchars($num1); ?>" required>
+    </div>
+    <div class="form-group">
+        <label>Num2:</label>
+        <input type="number" name="num2" step="any"
+        value="<?php echo htmlspecialchars($num2); ?>" required>
+    </div>
+    <input type="submit" value="Submit">
+</form>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Sanitize inputs
+    $name = htmlspecialchars($_POST['name']);
+    $age = (int) $_POST['age'];
+    $num1 = (float) $_POST['num1'];
+    $num2 = (float) $_POST['num2'];
+
+    echo "<div class='output'>";
+
+    // LOOP
+    echo "<div class='box'>";
+    echo "<div class='title'>Simple loop</div>";
+    for ($i = 3; $i >= 1; $i--) {
+        echo "$i<br>";
+    }
+    echo "</div>";
+
+    // DATE
+    echo "<div class='box'>";
+    echo "<div class='title'>Date function</div>";
+    echo date("F d, Y");
+    echo "</div>";
+
+    // INPUT DISPLAY
+    echo "<div class='box'>";
+    echo "<div class='title'>The variables inputted</div>";
+    echo "Name: $name<br>";
+    echo "Age: $age<br>";
+    echo "Num1: $num1<br>";
+    echo "Num2: $num2";
+    echo "</div>";
+
+    // STRING
+    echo "<div class='box'>";
+    echo "<div class='title'>Strings</div>";
+    echo "The length of your name '$name' is " . strlen($name);
+    echo "</div>";
+
+    // IF ELSE
+    echo "<div class='box'>";
+    echo "<div class='title'>Age classification</div>";
+    if ($age >= 18) {
+        echo "Your age is $age, that makes you an adult.";
+    } else {
+        echo "Your age is $age, that means you're still a minor.";
+    }
+    echo "</div>";
+
+    // OPERATORS
+    echo "<div class='box'>";
+    echo "<div class='title'>Operators using inputted numbers</div>";
+    echo "Addition: " . ($num1 + $num2) . "<br>";
+    echo "Subtraction: " . ($num1 - $num2) . "<br>";
+    echo "Multiplication: " . ($num1 * $num2) . "<br>";
+
+    if ($num2 != 0) {
+        echo "Division: " . ($num1 / $num2);
+    } else {
+        echo "Division: Cannot divide by zero.";
+    }
+    echo "</div>";
+
+    // FINAL
+    echo "<div class='box'><b>That's all. Thank you!</b></div>";
+
+    echo "</div>";
+}
+?>
+
+</body>
+</html>
